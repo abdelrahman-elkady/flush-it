@@ -123,30 +123,6 @@ public class ApplicationsAdapter extends RecyclerView.Adapter<ApplicationsAdapte
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                Log.d("ApplicationsAdapter","Selection Check changed");
-
-                //TODO Clean multiple calls to sharedPreferences
-                if(Prefs.getStringSet(Constants.CHECKED_ITEMS , null) == null) {
-                    HashSet<String> set = new HashSet<String>();
-                    if(isChecked) {
-                        mSelectedAppsList.add(packageName);
-
-                        set.add(packageName);
-                    }
-                    Prefs.putStringSet(Constants.CHECKED_ITEMS,set );
-                }
-                else {
-                    HashSet<String> set = (HashSet<String>) Prefs.getStringSet(Constants.CHECKED_ITEMS,null);
-                    if(isChecked) {
-                        set.add(packageName);
-                        mSelectedAppsList.add(packageName);
-                    }else {
-                        Log.d("REMOVE!","Item Removed !");
-                        set.remove(packageName);
-                        mSelectedAppsList.remove(packageName);
-                    }
-                    Prefs.putStringSet(Constants.CHECKED_ITEMS,set);
-                }
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
