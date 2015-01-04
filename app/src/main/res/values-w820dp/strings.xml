@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="nothing_description">nothing</string>
+    <string name="settings_hint_app_name">Application Name</string>
+    <string name="settings_hint_package_name">Package Name</string>
+</resources>
