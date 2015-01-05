@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -26,12 +27,13 @@ import util.Constants;
  *
  * @author kady
  */
-public class ApplicationsAdapter extends RecyclerView.Adapter<ApplicationsAdapter.ViewHolder> implements CompoundButton.OnCheckedChangeListener {
+public class ApplicationsAdapter extends BaseAdapter {
 
     private ArrayList<ResolveInfo> mData;
     private ArrayList<String> mSelectedAppsList ;
 
     private PackageManager mPackageManager ;
+    private Context mContext;
 
     //private SharedPreferences mSharedPreferences ;
 
@@ -39,7 +41,7 @@ public class ApplicationsAdapter extends RecyclerView.Adapter<ApplicationsAdapte
     // Constructor !
     public ApplicationsAdapter(Context context , ArrayList<ResolveInfo> mData) {
         this.mData = mData;
-
+        this.mContext = context;
 
         this.mPackageManager = context.getPackageManager();
         //this.mSharedPreferences = context.getSharedPreferences(Constants.PREFERENCE_KEY,Context.MODE_PRIVATE);
@@ -52,24 +54,49 @@ public class ApplicationsAdapter extends RecyclerView.Adapter<ApplicationsAdapte
         }
     }
 
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int i) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_settings, parent, false);
 
-        return new ViewHolder(view);
+    @Override
+    public int getCount() {
+        return mData.size();
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
+    public ResolveInfo getItem(int i) {
+        return mData.get(i);
+    }
 
+    @Override
+    public long getItemId(int position) {
+        return 0;
+    }
 
-        final String packageName = getItem(i).activityInfo.packageName;
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View view = convertView ;
 
-        viewHolder.mAppName.setText(getItem(i).loadLabel(mPackageManager).toString());
+        if(view == null) {
+            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(R.layout.item_settings,null);
+            ViewHolder viewHolder = new ViewHolder();
+
+            viewHolder.mAppName = (TextView) view.findViewById(R.id.settings_item_txt_app_name);
+            viewHolder.mPackageName = (TextView) view.findViewById(R.id.settings_item_txt_package_name);
+            viewHolder.mAppIcon = (ImageView) view.findViewById(R.id.settings_item_img_icon);
+            viewHolder.mSelectedSwitch = (Switch) view.findViewById(R.id.settings_item_switch_selected);
+            view.setTag(viewHolder);
+        }
+
+        ViewHolder viewHolder = (ViewHolder) view.getTag();
+
+        ResolveInfo info = getItem(position);
+
+        final String packageName = info.activityInfo.packageName;
+
+        viewHolder.mAppName.setText(info.loadLabel(mPackageManager).toString());
         viewHolder.mPackageName.setText(packageName);
-        viewHolder.mAppIcon.setImageDrawable(getItem(i).loadIcon(mPackageManager));
+        viewHolder.mAppIcon.setImageDrawable(info.loadIcon(mPackageManager));
 
+        viewHolder.mSelectedSwitch.setOnCheckedChangeListener(null); //detaching listener before changing check
         if(mSelectedAppsList.contains(packageName))
             viewHolder.mSelectedSwitch.setChecked(true);
         else
@@ -106,40 +133,17 @@ public class ApplicationsAdapter extends RecyclerView.Adapter<ApplicationsAdapte
             }
         });
 
+        return view ;
     }
 
-    @Override
-    public int getItemCount() {
-        return mData.size();
-    }
 
-    /**
-     * Getting the item at the given index
-     */
-    private ResolveInfo getItem(int i) {
-        return mData.get(i);
-    }
-
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-    }
-
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder {
 
         TextView mAppName ;
         TextView mPackageName ;
         ImageView mAppIcon;
         Switch mSelectedSwitch;
 
-        public ViewHolder(View itemView) {
-            super(itemView);
 
-            mAppName = (TextView) itemView.findViewById(R.id.settings_item_txt_app_name);
-            mPackageName = (TextView) itemView.findViewById(R.id.settings_item_txt_package_name);
-            mAppIcon = (ImageView) itemView.findViewById(R.id.settings_item_img_icon);
-            mSelectedSwitch = (Switch) itemView.findViewById(R.id.settings_item_switch_selected);
-
-        }
     }
 }
