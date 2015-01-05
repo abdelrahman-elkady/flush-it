@@ -1,11 +1,9 @@
 package activities;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,7 +11,9 @@ import android.view.View;
 import com.hideme.hideme.R;
 import com.pixplicity.easyprefs.library.Prefs;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 
 import at.markushi.ui.CircleButton;
 import util.Constants;
@@ -33,7 +33,12 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 //TODO Add the hideMe functionality here
-                Log.d("SELECTED",Prefs.getStringSet(Constants.CHECKED_ITEMS,null).toString());
+                Set<String> data = Prefs.getStringSet(Constants.CHECKED_ITEMS,null) ;
+                List<String> dataList = Arrays.asList(data.toArray(new String[data.size()]));
+                for(String app : dataList) {
+                    uninstallApp(app);
+                }
+                dataList.clear();
             }
         });
     }
@@ -61,5 +66,12 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void uninstallApp(String packageName) {
+        Uri packageUri = Uri.parse("package:"+ packageName);
+        Intent uninstallIntent = new Intent(Intent.ACTION_DELETE,
+                packageUri);
+        startActivity(uninstallIntent);
     }
 }

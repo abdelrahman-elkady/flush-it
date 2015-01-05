@@ -46,7 +46,7 @@ public class SettingsActivity extends ActionBarActivity {
         dataArrayList.addAll(getPackageManager().queryIntentActivities(appQueryIntent, PackageManager.GET_META_DATA));
 
 
-        // Filtering : Removing uninstallable apps !
+        // Filtering : Removing non-uninstallable apps !
         Iterator<ResolveInfo> iterator = dataArrayList.iterator();
         while (iterator.hasNext()) {
             ResolveInfo info = iterator.next();
