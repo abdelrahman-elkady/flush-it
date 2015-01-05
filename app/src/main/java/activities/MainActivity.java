@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,7 +19,7 @@ import at.markushi.ui.CircleButton;
 import util.Constants;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity {
 
     private CircleButton mHideMeButton ;
 
