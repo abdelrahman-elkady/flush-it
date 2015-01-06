@@ -1,44 +1,49 @@
 package activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.hideme.hideme.R;
-import com.pixplicity.easyprefs.library.Prefs;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
 
 import at.markushi.ui.CircleButton;
 import util.Constants;
+import util.Utilities;
 
 
 public class MainActivity extends ActionBarActivity {
 
     private CircleButton mHideMeButton ;
+    private SharedPreferences mSharedPreferences ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Prefs.initPrefs(this);
+        mSharedPreferences = this.getSharedPreferences(Constants.PREFERENCE_KEY,MODE_PRIVATE);
         mHideMeButton = (CircleButton) findViewById(R.id.btn_hide_me);
         mHideMeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO Add the hideMe functionality here
-                Set<String> data = Prefs.getStringSet(Constants.CHECKED_ITEMS,null) ;
-                List<String> dataList = Arrays.asList(data.toArray(new String[data.size()]));
+
+                Log.d("SELECTED APPS", Utilities.getStringArrayPreferences(mSharedPreferences,Constants.CHECKED_ITEMS).toString());
+
+                /*//TODO Add the hideMe functionality here
+                Set<String> data = mSharedPreferences.getStringSet(Constants.CHECKED_ITEMS,null) ;
+                List<String> dataList = new ArrayList<String>(Arrays.asList(data.toArray(new String[data.size()])));
+
                 for(String app : dataList) {
                     uninstallApp(app);
                 }
+                // Clearing selected apps
                 dataList.clear();
+                mSharedPreferences.edit().putStringSet(Constants.CHECKED_ITEMS,new HashSet<String>()).apply();*/
             }
         });
     }

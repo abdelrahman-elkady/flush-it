@@ -27,10 +27,8 @@ import adapters.ApplicationsAdapter;
  */
 public class SettingsActivity extends ActionBarActivity {
 
-    private SharedPreferences mSharedPreferences ;
     private ListView mAppsListView;
     private ApplicationsAdapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

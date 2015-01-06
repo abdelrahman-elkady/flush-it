@@ -1,9 +1,9 @@
 package adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +15,12 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.hideme.hideme.R;
-import com.pixplicity.easyprefs.library.Prefs;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 
 import util.Constants;
+import util.Utilities;
 
 /**
  * Created by kady on 25/12/14.
@@ -30,12 +30,11 @@ import util.Constants;
 public class ApplicationsAdapter extends BaseAdapter {
 
     private ArrayList<ResolveInfo> mData;
-    private ArrayList<String> mSelectedAppsList ;
 
     private PackageManager mPackageManager ;
     private Context mContext;
 
-    //private SharedPreferences mSharedPreferences ;
+    private SharedPreferences mSharedPreferences ;
 
 
     // Constructor !
@@ -44,14 +43,8 @@ public class ApplicationsAdapter extends BaseAdapter {
         this.mContext = context;
 
         this.mPackageManager = context.getPackageManager();
-        //this.mSharedPreferences = context.getSharedPreferences(Constants.PREFERENCE_KEY,Context.MODE_PRIVATE);
-        Prefs.initPrefs(context);
+        this.mSharedPreferences = mContext.getSharedPreferences(Constants.PREFERENCE_KEY,Context.MODE_PRIVATE);
 
-        mSelectedAppsList = new ArrayList<>();
-
-        if(Prefs.getStringSet(Constants.CHECKED_ITEMS,null) != null) {
-            mSelectedAppsList.addAll(Prefs.getStringSet(Constants.CHECKED_ITEMS,null));
-        }
     }
 
 
@@ -96,8 +89,13 @@ public class ApplicationsAdapter extends BaseAdapter {
         viewHolder.mPackageName.setText(packageName);
         viewHolder.mAppIcon.setImageDrawable(info.loadIcon(mPackageManager));
 
+        if(Utilities.getStringArrayPreferences(mSharedPreferences, Constants.CHECKED_ITEMS) == null) { // Creating a set if it is null
+            ArrayList<String> data = new ArrayList<String>();
+            Utilities.putStringArrayPreferences(mSharedPreferences,Constants.CHECKED_ITEMS,data);
+        }
+
         viewHolder.mSelectedSwitch.setOnCheckedChangeListener(null); //detaching listener before changing check
-        if(mSelectedAppsList.contains(packageName))
+        if(Utilities.getStringArrayPreferences(mSharedPreferences, Constants.CHECKED_ITEMS).contains(packageName))
             viewHolder.mSelectedSwitch.setChecked(true);
         else
             viewHolder.mSelectedSwitch.setChecked(false);
@@ -109,27 +107,15 @@ public class ApplicationsAdapter extends BaseAdapter {
                 Log.d("ApplicationsAdapter","Selection Check changed");
 
                 //TODO Clean multiple calls to sharedPreferences
-                if(Prefs.getStringSet(Constants.CHECKED_ITEMS , null) == null) {
-                    HashSet<String> set = new HashSet<String>();
+                ArrayList<String> selectedApps = Utilities.getStringArrayPreferences(mSharedPreferences, Constants.CHECKED_ITEMS);
                     if(isChecked) {
-                        mSelectedAppsList.add(packageName);
-
-                        set.add(packageName);
-                    }
-                    Prefs.putStringSet(Constants.CHECKED_ITEMS,set );
-                }
-                else {
-                    HashSet<String> set = (HashSet<String>) Prefs.getStringSet(Constants.CHECKED_ITEMS,null);
-                    if(isChecked) {
-                        set.add(packageName);
-                        mSelectedAppsList.add(packageName);
+                        selectedApps.add(packageName);
                     }else {
-                        Log.d("REMOVE!","Item Removed !");
-                        set.remove(packageName);
-                        mSelectedAppsList.remove(packageName);
+                        Log.d("REMOVE!", "Item Removed !");
+                        selectedApps.remove(packageName);
                     }
-                    Prefs.putStringSet(Constants.CHECKED_ITEMS,set);
-                }
+                Utilities.putStringArrayPreferences(mSharedPreferences, Constants.CHECKED_ITEMS,selectedApps);
+
             }
         });
 
@@ -137,13 +123,11 @@ public class ApplicationsAdapter extends BaseAdapter {
     }
 
 
-    static class ViewHolder {
 
+    static class ViewHolder {
         TextView mAppName ;
         TextView mPackageName ;
         ImageView mAppIcon;
         Switch mSelectedSwitch;
-
-
     }
 }
