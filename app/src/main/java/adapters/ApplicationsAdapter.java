@@ -90,8 +90,8 @@ public class ApplicationsAdapter extends BaseAdapter {
         viewHolder.mAppIcon.setImageDrawable(info.loadIcon(mPackageManager));
 
         if(Utilities.getStringArrayPreferences(mSharedPreferences, Constants.CHECKED_ITEMS) == null) { // Creating a set if it is null
-            ArrayList<String> data = new ArrayList<String>();
-            Utilities.putStringArrayPreferences(mSharedPreferences,Constants.CHECKED_ITEMS,data);
+            ArrayList<String> data = new ArrayList<>();
+            Utilities.putStringArrayPreferences(mSharedPreferences, Constants.CHECKED_ITEMS, data);
         }
 
         viewHolder.mSelectedSwitch.setOnCheckedChangeListener(null); //detaching listener before changing check
@@ -114,7 +114,7 @@ public class ApplicationsAdapter extends BaseAdapter {
                         Log.d("REMOVE!", "Item Removed !");
                         selectedApps.remove(packageName);
                     }
-                Utilities.putStringArrayPreferences(mSharedPreferences, Constants.CHECKED_ITEMS,selectedApps);
+                Utilities.putStringArrayPreferences(mSharedPreferences, Constants.CHECKED_ITEMS, selectedApps);
 
             }
         });

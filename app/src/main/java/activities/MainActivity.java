@@ -9,8 +9,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.hideme.hideme.R;
+
+import java.util.ArrayList;
 
 import at.markushi.ui.CircleButton;
 import util.Constants;
@@ -34,16 +37,19 @@ public class MainActivity extends ActionBarActivity {
 
                 Log.d("SELECTED APPS", Utilities.getStringArrayPreferences(mSharedPreferences,Constants.CHECKED_ITEMS).toString());
 
-                /*//TODO Add the hideMe functionality here
-                Set<String> data = mSharedPreferences.getStringSet(Constants.CHECKED_ITEMS,null) ;
-                List<String> dataList = new ArrayList<String>(Arrays.asList(data.toArray(new String[data.size()])));
+                //TODO Add the hideMe functionality here
+                ArrayList<String> dataList = Utilities.getStringArrayPreferences(mSharedPreferences,Constants.CHECKED_ITEMS);
+
+                if(dataList.isEmpty()) {
+                    Toast.makeText(MainActivity.this,"All selected apps uninstalled", Toast.LENGTH_SHORT).show();
+                }
 
                 for(String app : dataList) {
                     uninstallApp(app);
                 }
                 // Clearing selected apps
                 dataList.clear();
-                mSharedPreferences.edit().putStringSet(Constants.CHECKED_ITEMS,new HashSet<String>()).apply();*/
+                Utilities.putStringArrayPreferences(mSharedPreferences, Constants.CHECKED_ITEMS,dataList);
             }
         });
     }
