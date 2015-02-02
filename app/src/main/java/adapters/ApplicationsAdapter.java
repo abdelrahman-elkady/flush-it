@@ -14,10 +14,9 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.hideme.hideme.R;
+import com.kady.hideme.R;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 import util.Constants;
 import util.Utilities;

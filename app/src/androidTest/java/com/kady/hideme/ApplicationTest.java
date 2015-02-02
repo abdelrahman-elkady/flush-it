@@ -1,4 +1,4 @@
-package com.hideme.hideme;
+package com.kady.hideme;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

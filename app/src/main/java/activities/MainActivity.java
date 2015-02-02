@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.hideme.hideme.R;
+import com.kady.hideme.R;
 
 import java.util.ArrayList;
 
