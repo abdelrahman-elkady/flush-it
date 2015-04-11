@@ -19,9 +19,9 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:src="@drawable/ic_action_edit"
-        fab:fab_colorNormal="@color/primary"
-        fab:fab_colorPressed="@color/primary_pressed"
-        fab:fab_colorRipple="@color/ripple" />
+        fab:fab_colorNormal="@color/fab_edit_primary"
+        fab:fab_colorPressed="@color/fab_edit_pressed"
+        fab:fab_colorRipple="@color/fab_edit_ripple" />
 
 
 
