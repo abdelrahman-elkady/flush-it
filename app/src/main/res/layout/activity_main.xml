@@ -19,7 +19,7 @@
         fancy:focusColor="@color/fancy_main_pressed"
         fancy:fontIconResource="&#xf00d;"
         fancy:iconPosition="left"
-        fancy:text="HIDE MEgit a"
+        fancy:text="HIDE ME"
 
         />
 
