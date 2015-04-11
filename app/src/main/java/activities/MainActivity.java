@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -50,6 +51,24 @@ public class MainActivity extends ActionBarActivity {
                 // Clearing selected apps
                 dataList.clear();
                 Utilities.putStringArrayPreferences(mSharedPreferences, Constants.CHECKED_ITEMS,dataList);
+
+            }
+        });
+
+
+        // To simulate button pressing color change with hollow button
+
+        mHideMeButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN) {
+                    mHideMeButton.setBorderColor(getResources().getColor(R.color.fancy_main_pressed));
+                    mHideMeButton.setTextColor(getResources().getColor(R.color.fancy_main_pressed));
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    mHideMeButton.setBorderColor(getResources().getColor(R.color.fancy_main_default));
+                    mHideMeButton.setTextColor(getResources().getColor(R.color.fancy_main_default));
+                }
+                return false;
             }
         });
     }
