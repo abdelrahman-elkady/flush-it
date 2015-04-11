@@ -15,14 +15,14 @@ import com.kady.hideme.R;
 
 import java.util.ArrayList;
 
-import at.markushi.ui.CircleButton;
+import mehdi.sakout.fancybuttons.FancyButton;
 import util.Constants;
 import util.Utilities;
 
 
 public class MainActivity extends ActionBarActivity {
 
-    private CircleButton mHideMeButton ;
+    private FancyButton mHideMeButton ;
     private SharedPreferences mSharedPreferences ;
 
     @Override
@@ -30,7 +30,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mSharedPreferences = this.getSharedPreferences(Constants.PREFERENCE_KEY,MODE_PRIVATE);
-        mHideMeButton = (CircleButton) findViewById(R.id.btn_hide_me);
+        mHideMeButton = (FancyButton) findViewById(R.id.btn_hide_me);
         mHideMeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
