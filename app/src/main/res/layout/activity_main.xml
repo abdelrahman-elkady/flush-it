@@ -16,16 +16,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="10dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:paddingLeft="100dp"
+        android:paddingRight="100dp"
         android:paddingTop="10dp"
-        fancy:defaultColor="@color/fancy_main_default"
-        fancy:focusColor="@color/fancy_main_pressed"
+        fancy:defaultColor="@android:color/transparent"
+        fancy:borderColor="@color/fancy_main_default"
+        fancy:borderWidth="5dp"
         fancy:fontIconResource="&#xf00d;"
-        fancy:iconPosition="left"
+        fancy:iconPosition="top"
         fancy:text="HIDE ME"
         fancy:fontIconSize="30sp"
         fancy:textSize="10sp"
+        fancy:textColor="@color/fancy_main_default"
         />
 
 

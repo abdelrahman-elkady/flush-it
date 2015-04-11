@@ -5,6 +5,6 @@
     <color name="fab_edit_pressed">#303f9f</color>
     <color name="fab_edit_ripple">#ffff8e8b</color>
     <color name="fancy_main_default">#F44336</color>
-    <color name="fancy_main_pressed">#EF5350</color>
+    <color name="fancy_main_pressed">#ffef6968</color>
 
 </resources>
