@@ -16,6 +16,8 @@ import com.kady.hideme.R;
 
 import java.util.ArrayList;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import mehdi.sakout.fancybuttons.FancyButton;
 import util.Constants;
 import util.Utilities;
@@ -23,15 +25,19 @@ import util.Utilities;
 
 public class MainActivity extends ActionBarActivity {
 
+    @InjectView(R.id.btn_hide_me)
     private FancyButton mHideMeButton ;
+
     private SharedPreferences mSharedPreferences ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.inject(this);
+
         mSharedPreferences = this.getSharedPreferences(Constants.PREFERENCE_KEY,MODE_PRIVATE);
-        mHideMeButton = (FancyButton) findViewById(R.id.btn_hide_me);
+
         mHideMeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
