@@ -27,10 +27,10 @@ import butterknife.InjectView;
 public class SettingsActivity extends ActionBarActivity {
 
     @InjectView(R.id.settings_lst_application_list)
-    private ListView mAppsListView;
+    ListView mAppsListView;
 
     @InjectView(R.id.settings_edit_fab)
-    private FloatingActionButton mEditFab;
+    FloatingActionButton mEditFab;
 
     private ApplicationsAdapter mAdapter;
 

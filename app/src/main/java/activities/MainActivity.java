@@ -26,9 +26,9 @@ import util.Utilities;
 public class MainActivity extends ActionBarActivity {
 
     @InjectView(R.id.btn_hide_me)
-    private FancyButton mHideMeButton ;
+    FancyButton mHideMeButton ;
 
-    private SharedPreferences mSharedPreferences ;
+    SharedPreferences mSharedPreferences ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
