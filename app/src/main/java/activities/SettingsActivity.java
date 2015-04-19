@@ -94,7 +94,7 @@ public class SettingsActivity extends ActionBarActivity {
         return fetchInstalledApps(false);
     }
 
-        private boolean isSystemPackage(ResolveInfo info) {
+    private boolean isSystemPackage(ResolveInfo info) {
         return (info.activityInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
     }
 }
