@@ -68,7 +68,7 @@ public class ApplicationsAdapter extends BaseAdapter {
 
         if(view == null) {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.item_settings,null);
+            view = inflater.inflate(R.layout.settings_app_selection_item,null);
             ViewHolder viewHolder = new ViewHolder();
 
             viewHolder.mAppName = (TextView) view.findViewById(R.id.settings_item_txt_app_name);
