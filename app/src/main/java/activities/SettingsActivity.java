@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import adapters.ApplicationsAdapter;
+import butterknife.InjectView;
 
 /**
  * Created by kady on 23/12/14.
@@ -24,17 +25,19 @@ import adapters.ApplicationsAdapter;
  */
 public class SettingsActivity extends ActionBarActivity {
 
+    @InjectView(R.id.settings_lst_application_list)
     private ListView mAppsListView;
-    private ApplicationsAdapter mAdapter;
+
+    @InjectView(R.id.settings_edit_fab)
     private FloatingActionButton mEditFab;
+
+    private ApplicationsAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        mAppsListView = (ListView) findViewById(R.id.settings_lst_application_list);
-        mEditFab = (FloatingActionButton) findViewById(R.id.settings_edit_fab);
 
         mEditFab.setOnClickListener(new View.OnClickListener() {
             @Override
