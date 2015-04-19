@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import adapters.ApplicationsAdapter;
+import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 /**
@@ -38,6 +39,7 @@ public class SettingsActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        ButterKnife.inject(this);
 
         mEditFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +50,20 @@ public class SettingsActivity extends ActionBarActivity {
 
         mEditFab.attachToListView(mAppsListView);
 
+        ArrayList<ResolveInfo> dataArrayList = fetchInstalledApps();
+
+
+        mAdapter = new ApplicationsAdapter(this,dataArrayList);
+        mAppsListView.setAdapter(mAdapter);
+
+
+    }
+
+    /**
+     * Fetching the installed applications on the device
+     * @return <code>ArrayList<ResolveInfo></code> contains info about all installed applications
+     */
+    private ArrayList<ResolveInfo> fetchInstalledApps() {
         // Getting all installed apps and adding them to dataArrayList
         final Intent installedAppsQueryIntent = new Intent(Intent.ACTION_MAIN, null);
         installedAppsQueryIntent.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -63,11 +79,7 @@ public class SettingsActivity extends ActionBarActivity {
             if (isSystemPackage(info))
                 iterator.remove();
         }
-
-        mAdapter = new ApplicationsAdapter(this,dataArrayList);
-        mAppsListView.setAdapter(mAdapter);
-
-
+        return dataArrayList;
     }
 
     private boolean isSystemPackage(ResolveInfo info) {
