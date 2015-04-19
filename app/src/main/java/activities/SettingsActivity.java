@@ -52,18 +52,19 @@ public class SettingsActivity extends ActionBarActivity {
 
         ArrayList<ResolveInfo> dataArrayList = fetchInstalledApps();
 
-
         mAdapter = new ApplicationsAdapter(this,dataArrayList);
         mAppsListView.setAdapter(mAdapter);
 
 
     }
 
+
     /**
      * Fetching the installed applications on the device
-     * @return <code>ArrayList<ResolveInfo></code> contains info about all installed applications
+     * @param systemApps pass true to include system applications
+     * @return <code>ArrayList<ResolveInfo></code> contains info about installed apps
      */
-    private ArrayList<ResolveInfo> fetchInstalledApps() {
+    private ArrayList<ResolveInfo> fetchInstalledApps(boolean systemApps) {
         // Getting all installed apps and adding them to dataArrayList
         final Intent installedAppsQueryIntent = new Intent(Intent.ACTION_MAIN, null);
         installedAppsQueryIntent.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -72,17 +73,28 @@ public class SettingsActivity extends ActionBarActivity {
         dataArrayList.addAll(getPackageManager().queryIntentActivities(installedAppsQueryIntent, PackageManager.GET_META_DATA));
 
 
-        // Filtering : Removing non-uninstallable apps [System-apps]!
-        Iterator<ResolveInfo> iterator = dataArrayList.iterator();
-        while (iterator.hasNext()) {
-            ResolveInfo info = iterator.next();
-            if (isSystemPackage(info))
-                iterator.remove();
+        if(!systemApps) {
+            // Filtering : Removing non-uninstallable apps [System-apps]!
+            Iterator<ResolveInfo> iterator = dataArrayList.iterator();
+            while (iterator.hasNext()) {
+                ResolveInfo info = iterator.next();
+                if (isSystemPackage(info))
+                    iterator.remove();
+            }
         }
+
         return dataArrayList;
     }
 
-    private boolean isSystemPackage(ResolveInfo info) {
+    /**
+     * Fetching the installed applications on the device without system apps
+     * @return <code>ArrayList<ResolveInfo></code> contains info about installed apps without system apps
+     */
+    private ArrayList<ResolveInfo> fetchInstalledApps() {
+        return fetchInstalledApps(false);
+    }
+
+        private boolean isSystemPackage(ResolveInfo info) {
         return (info.activityInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
     }
 }
