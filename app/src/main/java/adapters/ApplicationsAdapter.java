@@ -88,12 +88,15 @@ public class ApplicationsAdapter extends BaseAdapter {
         viewHolder.mPackageName.setText(packageName);
         viewHolder.mAppIcon.setImageDrawable(info.loadIcon(mPackageManager));
 
-        if(Utilities.getStringArrayPreferences(mSharedPreferences, Constants.CHECKED_ITEMS) == null) { // Creating a set if it is null
+        // Creating a set if it is null
+        if(Utilities.getStringArrayPreferences(mSharedPreferences, Constants.CHECKED_ITEMS) == null) {
             ArrayList<String> data = new ArrayList<>();
             Utilities.putStringArrayPreferences(mSharedPreferences, Constants.CHECKED_ITEMS, data);
         }
 
-        viewHolder.mSelectedSwitch.setOnCheckedChangeListener(null); //detaching listener before changing check
+        //detaching listener before changing check
+        viewHolder.mSelectedSwitch.setOnCheckedChangeListener(null);
+
         if(Utilities.getStringArrayPreferences(mSharedPreferences, Constants.CHECKED_ITEMS).contains(packageName))
             viewHolder.mSelectedSwitch.setChecked(true);
         else
@@ -103,16 +106,16 @@ public class ApplicationsAdapter extends BaseAdapter {
         viewHolder.mSelectedSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.d("ApplicationsAdapter","Selection Check changed");
 
                 //TODO Clean multiple calls to sharedPreferences
                 ArrayList<String> selectedApps = Utilities.getStringArrayPreferences(mSharedPreferences, Constants.CHECKED_ITEMS);
-                    if(isChecked) {
-                        selectedApps.add(packageName);
-                    }else {
-                        Log.d("REMOVE!", "Item Removed !");
-                        selectedApps.remove(packageName);
-                    }
+
+                if(isChecked)
+                    selectedApps.add(packageName);
+                else
+                    selectedApps.remove(packageName);
+
+
                 Utilities.putStringArrayPreferences(mSharedPreferences, Constants.CHECKED_ITEMS, selectedApps);
 
             }
