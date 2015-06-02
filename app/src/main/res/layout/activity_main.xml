@@ -22,10 +22,10 @@
         fancy:defaultColor="@android:color/transparent"
         fancy:borderColor="@color/fancy_main_default"
         fancy:borderWidth="5dp"
-        fancy:fontIconResource="&#xf00d;"
+        fancy:fontIconResource="&#xf014;"
         fancy:iconPosition="top"
         fancy:text="HIDE ME"
-        fancy:fontIconSize="30sp"
+        fancy:fontIconSize="25sp"
         fancy:textSize="10sp"
         fancy:textColor="@color/fancy_main_default"
         />
