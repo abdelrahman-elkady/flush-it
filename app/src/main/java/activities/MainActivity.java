@@ -25,7 +25,7 @@ import util.Utilities;
 
 public class MainActivity extends ActionBarActivity {
 
-    @InjectView(R.id.btn_hide_me)
+    @InjectView(R.id.btn_flush_it)
     FancyButton mFlushItButton;
 
     SharedPreferences mSharedPreferences ;
@@ -37,6 +37,8 @@ public class MainActivity extends ActionBarActivity {
         ButterKnife.inject(this);
 
         mSharedPreferences = this.getSharedPreferences(Constants.PREFERENCE_KEY,MODE_PRIVATE);
+
+        mFlushItButton.setCustomIconFont("Material-Design-Iconic-Font.ttf");
 
         mFlushItButton.setOnClickListener(new View.OnClickListener() {
             @Override
