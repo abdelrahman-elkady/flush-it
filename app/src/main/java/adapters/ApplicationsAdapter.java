@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.kady.hideme.R;
+import com.kady.flushit.R;
 
 import java.util.ArrayList;
 

@@ -12,7 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
-import com.kady.hideme.R;
+import com.kady.flushit.R;
 
 import java.util.ArrayList;
 
@@ -26,7 +26,7 @@ import util.Utilities;
 public class MainActivity extends ActionBarActivity {
 
     @InjectView(R.id.btn_hide_me)
-    FancyButton mHideMeButton ;
+    FancyButton mFlushItButton;
 
     SharedPreferences mSharedPreferences ;
 
@@ -38,25 +38,24 @@ public class MainActivity extends ActionBarActivity {
 
         mSharedPreferences = this.getSharedPreferences(Constants.PREFERENCE_KEY,MODE_PRIVATE);
 
-        mHideMeButton.setOnClickListener(new View.OnClickListener() {
+        mFlushItButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Log.d("SELECTED APPS", Utilities.getStringArrayPreferences(mSharedPreferences,Constants.CHECKED_ITEMS).toString());
+                Log.d("SELECTED APPS", Utilities.getStringArrayPreferences(mSharedPreferences, Constants.CHECKED_ITEMS).toString());
 
-                //TODO Add the hideMe functionality here
-                ArrayList<String> dataList = Utilities.getStringArrayPreferences(mSharedPreferences,Constants.CHECKED_ITEMS);
+                ArrayList<String> dataList = Utilities.getStringArrayPreferences(mSharedPreferences, Constants.CHECKED_ITEMS);
 
-                if(dataList.isEmpty()) {
-                    Toast.makeText(MainActivity.this,"All selected apps uninstalled", Toast.LENGTH_SHORT).show();
+                if (dataList.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "All selected apps uninstalled", Toast.LENGTH_SHORT).show();
                 }
 
-                for(String app : dataList) {
+                for (String app : dataList) {
                     uninstallApp(app);
                 }
                 // Clearing selected apps
                 dataList.clear();
-                Utilities.putStringArrayPreferences(mSharedPreferences, Constants.CHECKED_ITEMS,dataList);
+                Utilities.putStringArrayPreferences(mSharedPreferences, Constants.CHECKED_ITEMS, dataList);
 
             }
         });
@@ -64,15 +63,15 @@ public class MainActivity extends ActionBarActivity {
 
         // To simulate button pressing color change with hollow button
 
-        mHideMeButton.setOnTouchListener(new View.OnTouchListener() {
+        mFlushItButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_DOWN) {
-                    mHideMeButton.setBorderColor(getResources().getColor(R.color.fancy_main_pressed));
-                    mHideMeButton.setTextColor(getResources().getColor(R.color.fancy_main_pressed));
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    mFlushItButton.setBorderColor(getResources().getColor(R.color.fancy_main_pressed));
+                    mFlushItButton.setTextColor(getResources().getColor(R.color.fancy_main_pressed));
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    mHideMeButton.setBorderColor(getResources().getColor(R.color.fancy_main_default));
-                    mHideMeButton.setTextColor(getResources().getColor(R.color.fancy_main_default));
+                    mFlushItButton.setBorderColor(getResources().getColor(R.color.fancy_main_default));
+                    mFlushItButton.setTextColor(getResources().getColor(R.color.fancy_main_default));
                 }
                 return false;
             }

@@ -9,7 +9,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.ListView;
 
-import com.kady.hideme.R;
+import com.kady.flushit.R;
 import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
