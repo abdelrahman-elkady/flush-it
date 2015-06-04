@@ -43,7 +43,7 @@ public class Utilities {
      */
     public static ArrayList<String> getStringArrayPreferences(SharedPreferences sharedPreferences, String key) {
 
-        String json = sharedPreferences.getString(key, null);
+        String json = sharedPreferences.getString(key, "");
 
         ArrayList<String> data = new ArrayList<String>();
         if (json != null) {
