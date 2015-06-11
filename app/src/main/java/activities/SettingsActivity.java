@@ -1,5 +1,6 @@
 package activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -24,7 +25,7 @@ import butterknife.InjectView;
  *
  * @author kady
  */
-public class SettingsActivity extends ActionBarActivity {
+public class SettingsActivity extends Activity {
 
     @InjectView(R.id.settings_lst_application_list)
     ListView mAppsListView;
