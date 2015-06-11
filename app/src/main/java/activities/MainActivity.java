@@ -1,5 +1,6 @@
 package activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.kady.flushit.R;
+import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -23,7 +25,7 @@ import util.Constants;
 import util.Utilities;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
     @InjectView(R.id.btn_flush_it)
     FancyButton mFlushItButton;
@@ -59,6 +61,9 @@ public class MainActivity extends ActionBarActivity {
                 dataList.clear();
                 Utilities.putStringArrayPreferences(mSharedPreferences, Constants.CHECKED_ITEMS, dataList);
 
+
+
+
             }
         });
 
@@ -78,6 +83,7 @@ public class MainActivity extends ActionBarActivity {
                 return false;
             }
         });
+
     }
 
 

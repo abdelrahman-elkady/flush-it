@@ -29,9 +29,6 @@ public class SettingsActivity extends ActionBarActivity {
     @InjectView(R.id.settings_lst_application_list)
     ListView mAppsListView;
 
-    @InjectView(R.id.settings_edit_fab)
-    FloatingActionButton mEditFab;
-
     private ApplicationsAdapter mAdapter;
 
     @Override
@@ -40,15 +37,6 @@ public class SettingsActivity extends ActionBarActivity {
         setContentView(R.layout.activity_settings);
 
         ButterKnife.inject(this);
-
-        mEditFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO Launch Edit Activity
-            }
-        });
-
-        mEditFab.attachToListView(mAppsListView);
 
         ArrayList<ResolveInfo> dataArrayList = fetchInstalledApps();
 
