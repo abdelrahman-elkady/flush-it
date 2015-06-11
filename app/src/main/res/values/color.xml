@@ -3,6 +3,7 @@
 
     <color name="fab_edit_primary">#ffffffff</color>
     <color name="fab_edit_pressed">#F44336</color>
+    <color name="fab_ripple">#ffd03b31</color>
     <color name="fancy_main_default">#F44336</color>
     <color name="fancy_main_pressed">#ffff7e76</color>
 

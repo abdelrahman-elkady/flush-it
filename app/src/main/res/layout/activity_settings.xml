@@ -20,7 +20,9 @@
         android:layout_margin="16dp"
         android:src="@drawable/ic_action_edit"
         fab:fab_colorNormal="@color/fab_edit_primary"
-        fab:fab_colorPressed="@color/fab_edit_pressed" />
+        fab:fab_colorPressed="@color/fab_edit_pressed"
+        fab:fab_colorRipple="@color/fab_ripple"
+        />
 
 
 
