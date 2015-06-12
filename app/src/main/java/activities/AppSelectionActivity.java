@@ -1,13 +1,11 @@
 package activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.View;
 import android.widget.ListView;
 
 import com.kady.flushit.R;
@@ -24,9 +22,9 @@ import butterknife.InjectView;
  *
  * @author kady
  */
-public class SettingsActivity extends ActionBarActivity {
+public class AppSelectionActivity extends ActionBarActivity {
 
-    @InjectView(R.id.settings_lst_application_list)
+    @InjectView(R.id.lst_app_selection)
     ListView mAppsListView;
 
     private ApplicationsAdapter mAdapter;
@@ -34,7 +32,7 @@ public class SettingsActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_app_selection);
 
         ButterKnife.inject(this);
 

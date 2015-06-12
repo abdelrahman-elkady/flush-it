@@ -10,7 +10,7 @@
         android:layout_width="65dip"
         android:layout_height="65dip"
         android:padding="3dp"
-        android:id="@+id/settings_item_img_icon"
+        android:id="@+id/img_app_icon"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -23,9 +23,11 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:hint="@string/settings_hint_app_name"
         android:padding="2dp"
-        android:id="@+id/settings_item_txt_app_name"
-        android:layout_toRightOf="@+id/settings_item_img_icon"
-        android:layout_toEndOf="@+id/settings_item_img_icon"/>
+        android:id="@+id/txt_app_name"
+        android:layout_toRightOf="@+id/img_app_icon"
+        android:layout_toEndOf="@+id/img_app_icon"
+        android:layout_toLeftOf="@+id/switch_app_select"
+        android:layout_toStartOf="@+id/switch_app_select"/>
 
 
     <TextView
@@ -35,13 +37,15 @@
         android:text="@string/settings_hint_package_name"
         android:padding="2dp"
         android:id="@+id/settings_item_txt_package_name"
-        android:layout_below="@+id/settings_item_txt_app_name"
-        android:layout_toRightOf="@+id/settings_item_img_icon"
-        android:layout_toEndOf="@+id/settings_item_img_icon"
+        android:layout_below="@+id/txt_app_name"
+        android:layout_toRightOf="@+id/img_app_icon"
+        android:layout_toEndOf="@+id/img_app_icon"
+        android:layout_toLeftOf="@+id/switch_app_select"
+        android:layout_toStartOf="@+id/switch_app_select"
         />
 
     <Switch
-        android:id="@+id/settings_item_switch_selected"
+        android:id="@+id/switch_app_select"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -50,9 +54,5 @@
         android:layout_marginRight="3dp"
         android:layout_marginEnd="3dp"
         />
-
-
-
-
 
 </RelativeLayout>

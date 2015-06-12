@@ -67,13 +67,13 @@ public class ApplicationsAdapter extends BaseAdapter {
 
         if(view == null) {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.settings_app_selection_item,null);
+            view = inflater.inflate(R.layout.app_selection_item,null);
             ViewHolder viewHolder = new ViewHolder();
 
-            viewHolder.mAppName = (TextView) view.findViewById(R.id.settings_item_txt_app_name);
+            viewHolder.mAppName = (TextView) view.findViewById(R.id.txt_app_name);
             viewHolder.mPackageName = (TextView) view.findViewById(R.id.settings_item_txt_package_name);
-            viewHolder.mAppIcon = (ImageView) view.findViewById(R.id.settings_item_img_icon);
-            viewHolder.mSelectedSwitch = (Switch) view.findViewById(R.id.settings_item_switch_selected);
+            viewHolder.mAppIcon = (ImageView) view.findViewById(R.id.img_app_icon);
+            viewHolder.mSelectedSwitch = (Switch) view.findViewById(R.id.switch_app_select);
             view.setTag(viewHolder);
         }
 
