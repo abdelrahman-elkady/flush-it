@@ -1,5 +1,6 @@
 package activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
@@ -11,16 +12,11 @@ import com.kady.flushit.R;
  *
  * @author kady
  */
-public class SettingsActivity extends ActionBarActivity {
+public class AboutActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
-
-
-        if(getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // Back to action bar
-        }
+        setContentView(R.layout.activity_about);
     }
 
     @Override

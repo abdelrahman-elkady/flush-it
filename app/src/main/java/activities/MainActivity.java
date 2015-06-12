@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import com.kady.flushit.R;
 import com.software.shell.fab.ActionButton;
-import com.software.shell.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -120,6 +119,7 @@ public class MainActivity extends ActionBarActivity {
         return true;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -127,12 +127,23 @@ public class MainActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            //TODO launch settings activity
+        switch(id) {
+            case android.R.id.home:
+                this.finish(); // Using it as back for now
+                return true;
+
+            case(R.id.action_settings):
+                startActivity(new Intent(this, SettingsActivity.class));
+                return true;
+
+            case(R.id.action_about):
+                startActivity(new Intent(this,AboutActivity.class));
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
 
-        return super.onOptionsItemSelected(item);
     }
 
 }
