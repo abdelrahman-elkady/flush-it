@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.kady.flushit.R;
-import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -25,7 +24,7 @@ import util.Constants;
 import util.Utilities;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity {
 
     @InjectView(R.id.btn_flush_it)
     FancyButton mFlushItButton;

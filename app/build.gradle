@@ -29,5 +29,5 @@ dependencies {
     compile 'com.github.medyo:fancybuttons:1.2@aar'
     compile 'com.android.support:recyclerview-v7:21.0.+'
     compile 'com.jakewharton:butterknife:6.0.0'
-    compile 'com.melnykov:floatingactionbutton:1.1.0'
+    compile 'com.github.shell-software:fab:1.1.1'
 }

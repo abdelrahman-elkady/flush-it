@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="fab_edit_primary">#ffffffff</color>
-    <color name="fab_edit_pressed">#F44336</color>
-    <color name="fab_ripple">#ffd03b31</color>
+    <color name="color_primary">#F44336</color>
+    <color name="color_primary_dark">#D32F2F</color>
+    <color name="color_primary_light">#FFCDD2</color>
+    <color name="colorAccent">#607D8B</color>
+
+    <color name="fab_add_primary">#607D8B</color>
+    <color name="fab_add_pressed">#ff475e6a</color>
+    <color name="fab_add_ripple">#ff3b4b57</color>
     <color name="fancy_main_default">#F44336</color>
     <color name="fancy_main_pressed">#ffff7e76</color>
 

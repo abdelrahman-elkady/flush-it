@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.kady.flushit.R;
-import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -25,7 +24,7 @@ import butterknife.InjectView;
  *
  * @author kady
  */
-public class SettingsActivity extends Activity {
+public class SettingsActivity extends ActionBarActivity {
 
     @InjectView(R.id.settings_lst_application_list)
     ListView mAppsListView;
