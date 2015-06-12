@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="3dp"
+    android:padding="4dp"
     android:layout_weight="10"
     >
 
@@ -24,6 +24,8 @@
         android:hint="@string/settings_hint_app_name"
         android:padding="2dp"
         android:id="@+id/txt_app_name"
+        android:singleLine="true"
+        android:ellipsize="end"
         android:layout_toRightOf="@+id/img_app_icon"
         android:layout_toEndOf="@+id/img_app_icon"
         android:layout_toLeftOf="@+id/switch_app_select"
@@ -38,6 +40,8 @@
         android:padding="2dp"
         android:id="@+id/settings_item_txt_package_name"
         android:layout_below="@+id/txt_app_name"
+        android:singleLine="true"
+        android:ellipsize="end"
         android:layout_toRightOf="@+id/img_app_icon"
         android:layout_toEndOf="@+id/img_app_icon"
         android:layout_toLeftOf="@+id/switch_app_select"

@@ -32,7 +32,7 @@
         />
 
     <com.software.shell.fab.ActionButton
-        android:id="@+id/action_button"
+        android:id="@+id/fab_select_apps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

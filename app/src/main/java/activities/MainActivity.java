@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.kady.flushit.R;
+import com.software.shell.fab.ActionButton;
+import com.software.shell.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -28,6 +30,9 @@ public class MainActivity extends ActionBarActivity {
     @InjectView(R.id.btn_flush_it)
     FancyButton mFlushItButton;
 
+    @InjectView(R.id.fab_select_apps)
+    ActionButton mSelectAppsFAB;
+
     SharedPreferences mSharedPreferences ;
 
     @Override
@@ -39,6 +44,15 @@ public class MainActivity extends ActionBarActivity {
         mSharedPreferences = this.getSharedPreferences(Constants.PREFERENCE_KEY,MODE_PRIVATE);
 
         mFlushItButton.setCustomIconFont("Material-Design-Iconic-Font.ttf");
+
+        initializeListeners();
+
+    }
+
+    /**
+     * Adding listeners to the views
+     */
+    private void initializeListeners() {
 
         mFlushItButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,15 +73,11 @@ public class MainActivity extends ActionBarActivity {
                 dataList.clear();
                 Utilities.putStringArrayPreferences(mSharedPreferences, Constants.CHECKED_ITEMS, dataList);
 
-
-
-
             }
         });
 
 
         // To simulate button pressing color change with hollow button
-
         mFlushItButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -82,6 +92,24 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
+        mSelectAppsFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AppSelectionActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    /**
+     * Uninstalling an app using ACTION_DELETE
+     * @param packageName the package full name without <em>package:</em>
+     */
+    private void uninstallApp(String packageName) {
+        Uri packageUri = Uri.parse("package:"+ packageName);
+        Intent uninstallIntent = new Intent(Intent.ACTION_DELETE,
+                packageUri);
+        startActivity(uninstallIntent);
     }
 
 
@@ -101,18 +129,10 @@ public class MainActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent intent = new Intent(this, AppSelectionActivity.class);
-            startActivity(intent);
-            return true;
+            //TODO launch settings activity
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void uninstallApp(String packageName) {
-        Uri packageUri = Uri.parse("package:"+ packageName);
-        Intent uninstallIntent = new Intent(Intent.ACTION_DELETE,
-                packageUri);
-        startActivity(uninstallIntent);
-    }
 }
