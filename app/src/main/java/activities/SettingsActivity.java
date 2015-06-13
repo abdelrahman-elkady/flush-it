@@ -6,21 +6,29 @@ import android.view.MenuItem;
 
 import com.kady.flushit.R;
 
+import fragments.SettingsFragment;
+
 /**
  * Created by kady on 12/06/15.
  *
  * @author kady
  */
 public class SettingsActivity extends ActionBarActivity {
+    public static final String KEY_BACKUP_APK = "pref_backup_apk";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true); // Back to action bar
         }
+
+        getFragmentManager().beginTransaction()
+                .replace(R.id.settings_container, new SettingsFragment())
+                .commit();
     }
 
     @Override

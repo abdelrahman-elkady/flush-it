@@ -2,8 +2,13 @@ package activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -15,6 +20,8 @@ import android.widget.Toast;
 import com.kady.flushit.R;
 import com.software.shell.fab.ActionButton;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import butterknife.ButterKnife;
@@ -40,7 +47,12 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
 
+
         mSharedPreferences = this.getSharedPreferences(Constants.PREFERENCE_KEY,MODE_PRIVATE);
+
+        PreferenceManager.setDefaultValues(this,Constants.PREFERENCE_KEY,MODE_PRIVATE, R.xml.preferences, false); // Setting default values for first run
+
+        Utilities.logSharedPreferences(mSharedPreferences);
 
         mFlushItButton.setCustomIconFont("Material-Design-Iconic-Font.ttf");
 
@@ -66,6 +78,40 @@ public class MainActivity extends ActionBarActivity {
                 }
 
                 for (String app : dataList) {
+                    boolean backupApks = mSharedPreferences.getBoolean(SettingsActivity.KEY_BACKUP_APK, false);
+                    Log.d("BACKUP APKS",backupApks+"");
+                    if(backupApks) {
+                        try {
+                            ApplicationInfo info = MainActivity.this.getPackageManager().getApplicationInfo(app,0);
+                            String path = info.sourceDir;
+
+                            // External Storage is available
+                            if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+                                File apkFile = new File(path);
+
+                                File backupDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),Constants.APKS_BACKUP_DIR);
+
+                                backupDir.mkdirs();
+
+                                Log.d("DIR", backupDir.getAbsolutePath());
+                                Log.d("DIR","exist: " +backupDir.exists()+"");
+                                Log.d("DIR","Directory : " + backupDir.isDirectory()+"");
+
+                                if (backupDir.mkdirs()) {
+                                    Utilities.copyFile(apkFile,backupDir);
+                                }
+
+
+                            }
+
+
+                        } catch (PackageManager.NameNotFoundException e) {
+                            Log.e("APK BACKUP","package " + app + " can't be found for backup" );
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
                     uninstallApp(app);
                 }
                 // Clearing selected apps
