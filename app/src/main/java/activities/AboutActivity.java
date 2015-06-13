@@ -1,11 +1,15 @@
 package activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.kady.flushit.R;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 /**
  * Created by kady on 12/06/15.
@@ -13,10 +17,16 @@ import com.kady.flushit.R;
  * @author kady
  */
 public class AboutActivity extends ActionBarActivity {
+    @InjectView(R.id.txt_attribution)
+    TextView mAttributionTextView ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+
+        ButterKnife.inject(this);
+        mAttributionTextView.setMovementMethod(LinkMovementMethod.getInstance()); // activating anchor links
     }
 
     @Override
