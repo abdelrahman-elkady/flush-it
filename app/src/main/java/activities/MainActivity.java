@@ -73,33 +73,29 @@ public class MainActivity extends ActionBarActivity {
 
                 ArrayList<String> dataList = Utilities.getStringArrayPreferences(mSharedPreferences, Constants.CHECKED_ITEMS);
 
-                if (dataList.isEmpty()) {
+                if (dataList == null || dataList.isEmpty()) {
                     Toast.makeText(MainActivity.this, "All selected apps uninstalled", Toast.LENGTH_SHORT).show();
                 }
 
                 for (String app : dataList) {
                     boolean backupApks = mSharedPreferences.getBoolean(SettingsActivity.KEY_BACKUP_APK, false);
-                    Log.d("BACKUP APKS",backupApks+"");
+
                     if(backupApks) {
                         try {
+
                             ApplicationInfo info = MainActivity.this.getPackageManager().getApplicationInfo(app,0);
                             String path = info.sourceDir;
 
-                            // External Storage is available
-                            if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+                            if (Utilities.isExternalStorageWritable()) {
                                 File apkFile = new File(path);
 
-                                File backupDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),Constants.APKS_BACKUP_DIR);
+                                File backupDir = Environment.getExternalStoragePublicDirectory(Constants.APKS_BACKUP_DIR);
 
-                                backupDir.mkdirs();
-
-                                Log.d("DIR", backupDir.getAbsolutePath());
-                                Log.d("DIR","exist: " +backupDir.exists()+"");
-                                Log.d("DIR","Directory : " + backupDir.isDirectory()+"");
-
-                                if (backupDir.mkdirs()) {
-                                    Utilities.copyFile(apkFile,backupDir);
+                                if(!backupDir.exists()) {
+                                    backupDir.mkdirs();
                                 }
+
+                                Utilities.copyFile(apkFile,new File(backupDir,apkFile.getName()));
 
 
                             }
