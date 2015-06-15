@@ -54,7 +54,7 @@ public class MainActivity extends ActionBarActivity {
 
         Utilities.logSharedPreferences(mSharedPreferences);
 
-        mFlushItButton.setCustomIconFont("Material-Design-Iconic-Font.ttf");
+        mFlushItButton.setCustomIconFont("MaterialIcons-Regular.ttf");
 
         initializeListeners();
 

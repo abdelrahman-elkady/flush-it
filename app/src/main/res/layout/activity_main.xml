@@ -21,7 +21,7 @@
         fancy:fb_defaultColor="@android:color/transparent"
         fancy:fb_borderColor="@color/fancy_main_default"
         fancy:fb_borderWidth="5dp"
-        fancy:fb_fontIconResource="&#xf020;"
+        fancy:fb_fontIconResource="@string/font_icon_delete"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         fancy:fb_iconPosition="top"
