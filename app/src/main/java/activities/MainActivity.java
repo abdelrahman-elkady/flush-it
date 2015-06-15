@@ -145,7 +145,7 @@ public class MainActivity extends ActionBarActivity {
                 backupDir.mkdirs();
             }
 
-            String backupName = appInfo.packageName + "_v"+MainActivity.this.getPackageManager().getPackageInfo(packageName, 0).versionName;
+            String backupName = appInfo.packageName + "_v"+MainActivity.this.getPackageManager().getPackageInfo(packageName, 0).versionName + ".apk";
             Utilities.copyFile(apkFile, new File(backupDir, backupName));
         }
     }
