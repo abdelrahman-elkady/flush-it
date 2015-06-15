@@ -1,5 +1,6 @@
 package activities;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.method.LinkMovementMethod;
@@ -20,12 +21,22 @@ public class AboutActivity extends ActionBarActivity {
     @InjectView(R.id.txt_attribution)
     TextView mAttributionTextView ;
 
+    @InjectView(R.id.txt_version_number)
+    TextView mVersionNumberTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-
         ButterKnife.inject(this);
+
+        try {
+            String versionName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+            mVersionNumberTextView.setText("v"+versionName);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
         mAttributionTextView.setMovementMethod(LinkMovementMethod.getInstance()); // activating anchor links
     }
 

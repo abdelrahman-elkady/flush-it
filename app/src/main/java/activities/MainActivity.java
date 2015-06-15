@@ -80,29 +80,13 @@ public class MainActivity extends ActionBarActivity {
                 for (String app : dataList) {
                     boolean backupApks = mSharedPreferences.getBoolean(SettingsActivity.KEY_BACKUP_APK, false);
 
-                    if(backupApks) {
+                    if (backupApks) {
                         try {
 
-                            ApplicationInfo info = MainActivity.this.getPackageManager().getApplicationInfo(app,0);
-                            String path = info.sourceDir;
-
-                            if (Utilities.isExternalStorageWritable()) {
-                                File apkFile = new File(path);
-
-                                File backupDir = Environment.getExternalStoragePublicDirectory(Constants.APKS_BACKUP_DIR);
-
-                                if(!backupDir.exists()) {
-                                    backupDir.mkdirs();
-                                }
-
-                                Utilities.copyFile(apkFile,new File(backupDir,apkFile.getName()));
-
-
-                            }
-
+                            backupApk(app);
 
                         } catch (PackageManager.NameNotFoundException e) {
-                            Log.e("APK BACKUP","package " + app + " can't be found for backup" );
+                            Log.e("APK BACKUP", "package " + app + " can't be found for backup");
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -140,6 +124,30 @@ public class MainActivity extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    /**
+     * Makes a copy of the uninstalled application in a backup folder
+     * @param packageName
+     * @throws PackageManager.NameNotFoundException
+     * @throws IOException
+     */
+    private void backupApk(String packageName) throws PackageManager.NameNotFoundException, IOException {
+        ApplicationInfo appInfo = MainActivity.this.getPackageManager().getApplicationInfo(packageName,0);
+        String path = appInfo.sourceDir;
+
+        if (Utilities.isExternalStorageWritable()) {
+            File apkFile = new File(path);
+
+            File backupDir = Environment.getExternalStoragePublicDirectory(Constants.APKS_BACKUP_DIR);
+
+            if(!backupDir.exists()) {
+                backupDir.mkdirs();
+            }
+
+            String backupName = appInfo.packageName + "_v"+MainActivity.this.getPackageManager().getPackageInfo(packageName, 0).versionName;
+            Utilities.copyFile(apkFile, new File(backupDir, backupName));
+        }
     }
 
     /**
