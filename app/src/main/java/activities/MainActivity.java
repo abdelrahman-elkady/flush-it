@@ -108,9 +108,11 @@ public class MainActivity extends ActionBarActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     mFlushItButton.setBorderColor(getResources().getColor(R.color.fancy_main_pressed));
+                    mFlushItButton.setIconColor(getResources().getColor(R.color.fancy_main_pressed));
                     mFlushItButton.setTextColor(getResources().getColor(R.color.fancy_main_pressed));
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     mFlushItButton.setBorderColor(getResources().getColor(R.color.fancy_main_default));
+                    mFlushItButton.setIconColor(getResources().getColor(R.color.fancy_main_default));
                     mFlushItButton.setTextColor(getResources().getColor(R.color.fancy_main_default));
                 }
                 return false;
