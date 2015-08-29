@@ -36,10 +36,10 @@ public class MainActivity extends ActionBarActivity {
     @InjectView(R.id.btn_flush_it)
     FancyButton mFlushItButton;
 
+    SharedPreferences mSharedPreferences ;
+
     @InjectView(R.id.fab_select_apps)
     ActionButton mSelectAppsFAB;
-
-    SharedPreferences mSharedPreferences ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

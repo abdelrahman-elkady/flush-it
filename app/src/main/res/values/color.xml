@@ -4,12 +4,19 @@
     <color name="color_primary">#F44336</color>
     <color name="color_primary_dark">#D32F2F</color>
     <color name="color_primary_light">#FFCDD2</color>
+
+    <color name="color_green">#7CB342</color>
+    <color name="color_green_dark">#558B2F</color>
+
     <color name="colorAccent">#607D8B</color>
 
     <color name="fab_add_primary">#607D8B</color>
     <color name="fab_add_pressed">#ff475e6a</color>
     <color name="fab_add_ripple">#ff3b4b57</color>
+
     <color name="fancy_main_default">#F44336</color>
     <color name="fancy_main_pressed">#ffff7e76</color>
+
+
 
 </resources>
