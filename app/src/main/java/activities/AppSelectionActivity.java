@@ -7,6 +7,7 @@ import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,7 +27,7 @@ import butterknife.InjectView;
  *
  * @author kady
  */
-public class AppSelectionActivity extends ActionBarActivity {
+public class AppSelectionActivity extends AppCompatActivity {
 
     @InjectView(R.id.lst_app_selection)
     ListView mAppsListView;

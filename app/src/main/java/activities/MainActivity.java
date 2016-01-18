@@ -9,7 +9,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,12 +33,12 @@ import util.Constants;
 import util.Utilities;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
     @InjectView(R.id.btn_flush_it)
     FancyButton mFlushItButton;
 
-    SharedPreferences mSharedPreferences ;
+    SharedPreferences mSharedPreferences;
 
     @InjectView(R.id.fab_select_apps)
     ActionButton mSelectAppsFAB;
@@ -48,9 +50,9 @@ public class MainActivity extends ActionBarActivity {
         ButterKnife.inject(this);
 
 
-        mSharedPreferences = this.getSharedPreferences(Constants.PREFERENCE_KEY,MODE_PRIVATE);
+        mSharedPreferences = this.getSharedPreferences(Constants.PREFERENCE_KEY, MODE_PRIVATE);
 
-        PreferenceManager.setDefaultValues(this,Constants.PREFERENCE_KEY,MODE_PRIVATE, R.xml.preferences, false); // Setting default values for first run
+        PreferenceManager.setDefaultValues(this, Constants.PREFERENCE_KEY, MODE_PRIVATE, R.xml.preferences, false); // Setting default values for first run
 
         Utilities.logSharedPreferences(mSharedPreferences);
 
@@ -107,13 +109,13 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    mFlushItButton.setBorderColor(getResources().getColor(R.color.fancy_main_pressed));
-                    mFlushItButton.setIconColor(getResources().getColor(R.color.fancy_main_pressed));
-                    mFlushItButton.setTextColor(getResources().getColor(R.color.fancy_main_pressed));
+                    mFlushItButton.setBorderColor(ContextCompat.getColor(MainActivity.this, R.color.fancy_main_pressed));
+                    mFlushItButton.setIconColor(ContextCompat.getColor(MainActivity.this, R.color.fancy_main_pressed));
+                    mFlushItButton.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.fancy_main_pressed));
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    mFlushItButton.setBorderColor(getResources().getColor(R.color.fancy_main_default));
-                    mFlushItButton.setIconColor(getResources().getColor(R.color.fancy_main_default));
-                    mFlushItButton.setTextColor(getResources().getColor(R.color.fancy_main_default));
+                    mFlushItButton.setBorderColor(ContextCompat.getColor(MainActivity.this, R.color.fancy_main_default));
+                    mFlushItButton.setIconColor(ContextCompat.getColor(MainActivity.this, R.color.fancy_main_default));
+                    mFlushItButton.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.fancy_main_default));
                 }
                 return false;
             }
@@ -130,12 +132,13 @@ public class MainActivity extends ActionBarActivity {
 
     /**
      * Makes a copy of the uninstalled application in a backup folder
+     *
      * @param packageName
      * @throws PackageManager.NameNotFoundException
      * @throws IOException
      */
     private void backupApk(String packageName) throws PackageManager.NameNotFoundException, IOException {
-        ApplicationInfo appInfo = MainActivity.this.getPackageManager().getApplicationInfo(packageName,0);
+        ApplicationInfo appInfo = MainActivity.this.getPackageManager().getApplicationInfo(packageName, 0);
         String path = appInfo.sourceDir;
 
         if (Utilities.isExternalStorageWritable()) {
@@ -143,21 +146,22 @@ public class MainActivity extends ActionBarActivity {
 
             File backupDir = Environment.getExternalStoragePublicDirectory(Constants.APKS_BACKUP_DIR);
 
-            if(!backupDir.exists()) {
+            if (!backupDir.exists()) {
                 backupDir.mkdirs();
             }
 
-            String backupName = appInfo.packageName + "_v"+MainActivity.this.getPackageManager().getPackageInfo(packageName, 0).versionName + ".apk";
+            String backupName = appInfo.packageName + "_v" + MainActivity.this.getPackageManager().getPackageInfo(packageName, 0).versionName + ".apk";
             Utilities.copyFile(apkFile, new File(backupDir, backupName));
         }
     }
 
     /**
      * Uninstalling an app using ACTION_DELETE
+     *
      * @param packageName the package full name without <em>package:</em>
      */
     private void uninstallApp(String packageName) {
-        Uri packageUri = Uri.parse("package:"+ packageName);
+        Uri packageUri = Uri.parse("package:" + packageName);
         Intent uninstallIntent = new Intent(Intent.ACTION_DELETE,
                 packageUri);
         startActivity(uninstallIntent);
@@ -179,17 +183,17 @@ public class MainActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        switch(id) {
+        switch (id) {
             case android.R.id.home:
                 this.finish(); // Using it as back for now
                 return true;
 
-            case(R.id.action_settings):
+            case (R.id.action_settings):
                 startActivity(new Intent(this, SettingsActivity.class));
                 return true;
 
-            case(R.id.action_about):
-                startActivity(new Intent(this,AboutActivity.class));
+            case (R.id.action_about):
+                startActivity(new Intent(this, AboutActivity.class));
                 return true;
 
             default:
