@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +21,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.kady.flushit.R;
-import com.software.shell.fab.ActionButton;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences mSharedPreferences;
 
     @InjectView(R.id.fab_select_apps)
-    ActionButton mSelectAppsFAB;
+    FloatingActionButton mSelectAppsFAB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
