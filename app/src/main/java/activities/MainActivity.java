@@ -26,8 +26,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import mehdi.sakout.fancybuttons.FancyButton;
 import util.Constants;
 import util.Utilities;
@@ -35,19 +35,19 @@ import util.Utilities;
 
 public class MainActivity extends AppCompatActivity {
 
-    @InjectView(R.id.btn_flush_it)
+    @Bind(R.id.btn_flush_it)
     FancyButton mFlushItButton;
 
     SharedPreferences mSharedPreferences;
 
-    @InjectView(R.id.fab_select_apps)
+    @Bind(R.id.fab_select_apps)
     FloatingActionButton mSelectAppsFAB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
 
         mSharedPreferences = this.getSharedPreferences(Constants.PREFERENCE_KEY, MODE_PRIVATE);

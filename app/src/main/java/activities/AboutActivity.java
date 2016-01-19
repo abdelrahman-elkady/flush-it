@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import com.kady.flushit.R;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by kady on 12/06/15.
@@ -19,21 +19,21 @@ import butterknife.InjectView;
  * @author kady
  */
 public class AboutActivity extends AppCompatActivity {
-    @InjectView(R.id.txt_attribution)
-    TextView mAttributionTextView ;
+    @Bind(R.id.txt_attribution)
+    TextView mAttributionTextView;
 
-    @InjectView(R.id.txt_version_number)
+    @Bind(R.id.txt_version_number)
     TextView mVersionNumberTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         try {
             String versionName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
-            mVersionNumberTextView.setText("v"+versionName);
+            mVersionNumberTextView.setText("v" + versionName);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -48,7 +48,7 @@ public class AboutActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        switch(id) {
+        switch (id) {
             case android.R.id.home:
                 this.finish(); // Using it as back for now
                 return true;

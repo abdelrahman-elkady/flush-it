@@ -19,8 +19,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import adapters.ApplicationsAdapter;
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by kady on 23/12/14.
@@ -29,7 +29,7 @@ import butterknife.InjectView;
  */
 public class AppSelectionActivity extends AppCompatActivity {
 
-    @InjectView(R.id.lst_app_selection)
+    @g(R.id.lst_app_selection)
     ListView mAppsListView;
 
     private ApplicationsAdapter mAdapter;
@@ -44,7 +44,7 @@ public class AppSelectionActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true); // Back to action bar
         }
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         ArrayList<ResolveInfo> dataArrayList = fetchInstalledApps();
 
