@@ -8,11 +8,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,12 +42,16 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.fab_select_apps)
     FloatingActionButton mSelectAppsFAB;
 
+    @Bind(R.id.toolbar)
+    Toolbar mToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        setSupportActionBar(mToolbar);
 
         mSharedPreferences = this.getSharedPreferences(Constants.PREFERENCE_KEY, MODE_PRIVATE);
 

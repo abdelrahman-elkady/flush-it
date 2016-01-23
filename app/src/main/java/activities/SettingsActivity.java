@@ -3,10 +3,13 @@ package activities;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.kady.flushit.R;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import fragments.SettingsFragment;
 
 /**
@@ -17,13 +20,19 @@ import fragments.SettingsFragment;
 public class SettingsActivity extends AppCompatActivity {
     public static final String KEY_BACKUP_APK = "pref_backup_apk";
 
+    @Bind(R.id.toolbar)
+    Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        if(getSupportActionBar() != null) {
+        ButterKnife.bind(this);
+
+        setSupportActionBar(mToolbar);
+
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true); // Back to action bar
         }
 
@@ -39,7 +48,7 @@ public class SettingsActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        switch(id) {
+        switch (id) {
             case android.R.id.home:
                 this.finish(); // Using it as back for now
                 return true;

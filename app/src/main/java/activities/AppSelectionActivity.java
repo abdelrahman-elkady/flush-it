@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,8 +30,11 @@ import butterknife.ButterKnife;
  */
 public class AppSelectionActivity extends AppCompatActivity {
 
-    @g(R.id.lst_app_selection)
+    @Bind(R.id.lst_app_selection)
     ListView mAppsListView;
+
+    @Bind(R.id.toolbar)
+    Toolbar mToolbar;
 
     private ApplicationsAdapter mAdapter;
 
@@ -39,16 +43,18 @@ public class AppSelectionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_selection);
 
+        ButterKnife.bind(this);
 
-        if(getSupportActionBar() != null) {
+        setSupportActionBar(mToolbar);
+
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true); // Back to action bar
         }
 
-        ButterKnife.bind(this);
 
         ArrayList<ResolveInfo> dataArrayList = fetchInstalledApps();
 
-        mAdapter = new ApplicationsAdapter(this,dataArrayList);
+        mAdapter = new ApplicationsAdapter(this, dataArrayList);
         mAppsListView.setAdapter(mAdapter);
 
 
@@ -57,6 +63,7 @@ public class AppSelectionActivity extends AppCompatActivity {
 
     /**
      * Fetching the installed applications on the device
+     *
      * @param systemApps pass true to include system applications
      * @return <code>ArrayList<ResolveInfo></code> contains info about installed apps
      */
@@ -69,7 +76,7 @@ public class AppSelectionActivity extends AppCompatActivity {
         dataArrayList.addAll(getPackageManager().queryIntentActivities(installedAppsQueryIntent, PackageManager.GET_META_DATA));
 
 
-        if(!systemApps) {
+        if (!systemApps) {
             // Filtering : Removing non-uninstallable apps [System-apps]!
             Iterator<ResolveInfo> iterator = dataArrayList.iterator();
             while (iterator.hasNext()) {
@@ -84,6 +91,7 @@ public class AppSelectionActivity extends AppCompatActivity {
 
     /**
      * Fetching the installed applications on the device without system apps
+     *
      * @return <code>ArrayList<ResolveInfo></code> contains info about installed apps without system apps
      */
     private ArrayList<ResolveInfo> fetchInstalledApps() {
@@ -108,17 +116,17 @@ public class AppSelectionActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        switch(id) {
+        switch (id) {
             case android.R.id.home:
                 this.finish(); // Using it as back for now
                 return true;
 
-            case(R.id.action_settings):
+            case (R.id.action_settings):
                 startActivity(new Intent(this, SettingsActivity.class));
                 return true;
 
-            case(R.id.action_about):
-                startActivity(new Intent(this,AboutActivity.class));
+            case (R.id.action_about):
+                startActivity(new Intent(this, AboutActivity.class));
                 return true;
 
             default:
