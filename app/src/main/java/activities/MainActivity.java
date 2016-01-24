@@ -82,25 +82,30 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "All selected apps uninstalled", Toast.LENGTH_SHORT).show();
                 }
 
-                for (String app : dataList) {
-                    boolean backupApks = mSharedPreferences.getBoolean(SettingsActivity.KEY_BACKUP_APK, false);
+                if (dataList != null) {
+                    for (String app : dataList) {
+                        boolean backupEnabled = mSharedPreferences.getBoolean(SettingsActivity.KEY_BACKUP_APK, false);
 
-                    if (backupApks) {
-                        try {
+                        if (backupEnabled) {
+                            try {
+                                backupApk(app);
 
-                            backupApk(app);
-
-                        } catch (PackageManager.NameNotFoundException e) {
-                            Log.e("APK BACKUP", "package " + app + " can't be found for backup");
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                            } catch (PackageManager.NameNotFoundException e) {
+                                Log.e("APK BACKUP", "package " + app + " can't be found for backup");
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
 
-                    uninstallApp(app);
+                        uninstallApp(app);
+                    }
                 }
+
                 // Clearing selected apps
-                dataList.clear();
+                if (dataList != null) {
+                    dataList.clear();
+                }
+
                 Utilities.putStringArrayPreferences(mSharedPreferences, Constants.CHECKED_ITEMS, dataList);
 
             }

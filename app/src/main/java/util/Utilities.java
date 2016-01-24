@@ -26,9 +26,10 @@ public class Utilities {
 
     /**
      * Put ArrayList<String> in the sharedPreferences
+     *
      * @param sharedPreferences sharedPreferences instance
-     * @param key the key value of the data
-     * @param values the ArrayList<String>
+     * @param key               the key value of the data
+     * @param values            the ArrayList<String>
      */
     public static void putStringArrayPreferences(SharedPreferences sharedPreferences, String key, ArrayList<String> values) {
 
@@ -47,8 +48,9 @@ public class Utilities {
 
     /**
      * Get an ArrayList<String> from sharedPreferences
+     *
      * @param sharedPreferences sharedPreferences instance
-     * @param key the key value of the data
+     * @param key               the key value of the data
      * @return the ArrayList<String> that matches the key
      */
     public static ArrayList<String> getStringArrayPreferences(SharedPreferences sharedPreferences, String key) {
@@ -57,7 +59,7 @@ public class Utilities {
 
         ArrayList<String> data = new ArrayList<String>();
         if (json != null) {
-            if(json.equals("")) {
+            if (json.equals("")) {
                 return new ArrayList<String>();
             }
             try {
@@ -69,8 +71,7 @@ public class Utilities {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }
-        else {
+        } else {
             return null;
         }
         return data;
@@ -79,6 +80,7 @@ public class Utilities {
 
     /**
      * Copies a file into another path
+     *
      * @param source
      * @param destination
      * @throws IOException
@@ -99,12 +101,13 @@ public class Utilities {
 
     /**
      * Logs the keys of the elements stored in the shared prefs
+     *
      * @param prefs
      */
     public static void logSharedPreferences(SharedPreferences prefs) {
-        Map<String,?> keys = prefs.getAll();
+        Map<String, ?> keys = prefs.getAll();
 
-        for(Map.Entry<String,?> entry : keys.entrySet()){
+        for (Map.Entry<String, ?> entry : keys.entrySet()) {
             Log.d("SHARED PREFS CONTENTS", entry.getKey() + ": " +
                     entry.getValue().toString());
         }
@@ -112,7 +115,8 @@ public class Utilities {
 
 
     /**
-     *  Checks if external storage is available for read and write
+     * Checks if external storage is available for read and write
+     *
      * @return true if ext storage ready for r/w
      */
     public static boolean isExternalStorageWritable() {
